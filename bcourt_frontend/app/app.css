@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --color-green-theme: #25493f;
+  --color-blue-theme: #142d4b;
+  --color-yellow-theme: #e7d706;
+}
+
+html,
+body {
+  @apply bg-white /*dark:bg-gray-950*/;
+
+  @media (prefers-color-scheme: green) {
+    color-scheme: green;
+  }
+
+}
+
+header {
+
+  @apply bg-green-theme;
+
+}

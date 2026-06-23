@@ -16,8 +16,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from bcourt_app.views import paymentviewset, patronviewset, dateviewset
+
+
+router = DefaultRouter()
+
+router.register(r'payment', paymentviewset, basename = "payment")
+router.register(r'patron', patronviewset, basename = "patron")
+router.register(r'date',dateviewset, basename= "date")
 
 urlpatterns = [
+    path("bcourt/", include("bcourt_app.urls")),
     path('admin/', admin.site.urls),
-    path("bcourt/", include("bcourt_app.urls"))
+    path("",include(router.urls)),
+    # path('bcourt/payment', paymentserializer.as_view(), name = 'payment'),
 ]
