@@ -12,8 +12,23 @@ export function BookingPage() {
 
             <div className = "flex flex-col-reverse md:flex-row items-center justify-center gap-10 w-full max-w-6xl"> 
 
-            <div className="w-full md:w-1/2 flex justify-center">
-            <Calendar />
+            <div className="w-full mb-10 md:w-1/2 relative justify-center">
+            <Calendar  />
+
+            <div className = "absolute mt-10 justify-center w-1/2 md:w-1/2">
+            <input type="text" id="name" className="bg-neutral-secondary-medium border rounded-2xl text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" required />
+            <input type="text" id="name" className="bg-neutral-secondary-medium border rounded-2xl text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" required />
+            <input type="text" id="name" className="bg-neutral-secondary-medium border rounded-2xl text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" required />
+            <input type="text" id="name" className="bg-neutral-secondary-medium border rounded-2xl text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" required />
+            <input type="text" id="name" className="bg-neutral-secondary-medium border rounded-2xl text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" required />
+            <input type="text" id="name" className="bg-neutral-secondary-medium border rounded-2xl text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" required />
+            <input type="text" id="name" className="bg-neutral-secondary-medium border rounded-2xl text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" required />
+            <input type="text" id="name" className="bg-neutral-secondary-medium border rounded-2xl text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" required />
+            <input type="text" id="name" className="bg-neutral-secondary-medium border rounded-2xl text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" required />
+            <input type="text" id="name" className="bg-neutral-secondary-medium border rounded-2xl text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" required />
+
+            </div>
+
             </div>
 
             <div className = "w-full md:w-1/2">
@@ -21,17 +36,21 @@ export function BookingPage() {
             <form className=" max-w-sm mx-auto">
             <div className="mb-5 p-5">
                 <label className="block mb-2.5 text-sm font-medium text-heading">Name: </label>
-                <input type="text" id="name" className="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" required />
+                <input type="text" id="name" className="bg-neutral-secondary-medium border rounded-2xl text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" required />
             </div>
 
             <div className = "mb-5 p-5">
                 <label className="block mb-2.5 text-sm font-medium text-heading">Contact Number: </label>
-                <input type="text" id="contact" className="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" required />
+                <input type="text" id="contact" className="bg-neutral-secondary-medium border rounded-2xl text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" required />
             </div>
         
-            <button type="submit" className="text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">Submit</button>
-            
+            <div className = "mb-5 p-5">
+                <button type="button" className ="mb-5 p-5 text-white bg-green-theme box-border border border-transparent rounded-2xl hover:bg-success-strong focus:ring-4 focus:ring-success-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">Book</button>
+            </div>
+
+
             </form>
+
 
             </div>
 

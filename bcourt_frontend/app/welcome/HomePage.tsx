@@ -1,6 +1,5 @@
 import NavBar from "../components/navBar";
 import Carousel from "../components/carousel";
-import Calendar from "react-calendar";
 
 
 export function HomePage() {
