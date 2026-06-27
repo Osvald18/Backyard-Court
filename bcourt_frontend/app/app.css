@@ -24,3 +24,7 @@ header {
   @apply bg-green-theme;
 
 }
+
+@utility no-scrollbar {
+  @apply [scrollbar-:none] [&::-webkit-scrollbar]:hidden;
+}

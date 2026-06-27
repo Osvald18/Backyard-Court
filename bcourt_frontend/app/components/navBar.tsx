@@ -1,6 +1,9 @@
 import bcourt_logo from "../assets/bcourt_logo.png";
+import { useNavigate } from "react-router";
 
 export default function navBar (){
+
+  const navigate = useNavigate();
 
     return(
         <header className="flex flex-col items-center gap-9">      
