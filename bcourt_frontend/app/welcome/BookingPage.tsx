@@ -1,7 +1,8 @@
 import NavBar from "../components/navBar";
 import Calendar from "react-calendar";
 import 'react-calendar/dist/Calendar.css';
-
+import AxiosInstance from "./Axios";
+import {useState, useEffect} from "react";
 
 export function pickSchedule() {
 
@@ -13,6 +14,17 @@ export function pickSchedule() {
 }
 
 export function BookingPage() {
+
+
+    const [date, setDate] = useState([])
+
+    console.log(date)
+
+     const GetData = () => {
+        AxiosInstance.get('date/').then((res) => { setDate(res.data) })
+     }
+
+     useEffect(() => {GetData()}, [])
 
 
     return(
@@ -31,107 +43,107 @@ export function BookingPage() {
 
             <div className = "h-80 overflow-y-auto no-scrollbar mt-10 mb-10 justify-center w-1/2 md:w-1/2 p-2">
 
-                <div id = "id-hour-05" className = "flex items-center gap-3 w-full row time-div">
+                <div id = "id-hour-05" className = "flex items-start gap-3 w-full row time-div">
                     <p className = "w-20 text-right shrink-0 text-xs whitespace-nowrap">5:00 AM</p>
                     <button type="button" className ="flex-1 h-10 bg-netural-secondary-medium border rounded-2xl border-green-theme hover:bg-success-strong focus:ring-4 focus:ring-green-theme shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none"></button>
                 </div>
 
-                <div id = "id-hour-06" className = "flex items-center gap-3 w-full row time-div">
+                <div id = "id-hour-06" className = "flex items-start gap-3 w-full row time-div">
                     <p className = "w-20 text-right shrink-0 text-xs whitespace-nowrap">6:00 AM</p>
                     <button type="button" className ="flex-1 h-10 bg-netural-secondary-medium border rounded-2xl border-green-theme hover:bg-success-strong focus:ring-4 focus:ring-green-theme shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none"></button>
                 </div>
 
-                <div id = "id-hour-07" className = "flex items-center gap-3 w-full row time-div">
+                <div id = "id-hour-07" className = "flex items-start gap-3 w-full row time-div">
                     <p className = "w-20 text-right shrink-0 text-xs whitespace-nowrap">7:00 AM</p>
                     <button type="button" className ="flex-1 h-10 bg-netural-secondary-medium border rounded-2xl border-green-theme hover:bg-success-strong focus:ring-4 focus:ring-green-theme shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none"></button>
                 </div>
 
-                <div id = "id-hour-08" className = "flex items-center gap-3 w-full row time-div">
+                <div id = "id-hour-08" className = "flex items-start gap-3 w-full row time-div">
                     <p className = "w-20 text-right shrink-0 text-xs whitespace-nowrap">8:00 AM</p>
                     <button type="button" className ="flex-1 h-10 bg-netural-secondary-medium border rounded-2xl border-green-theme hover:bg-success-strong focus:ring-4 focus:ring-green-theme shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none"></button>
                 </div>
 
-                <div id = "id-hour-09" className = "flex items-center gap-3 w-full row time-div">
+                <div id = "id-hour-09" className = "flex items-start gap-3 w-full row time-div">
                     <p className = "w-20 text-right shrink-0 text-xs  whitespace-nowrap">9:00 AM</p>
                     <button type="button" className ="flex-1 h-10 bg-netural-secondary-medium border rounded-2xl border-green-theme hover:bg-success-strong focus:ring-4 focus:ring-green-theme shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none"></button>
                 </div>
 
-                <div id = "id-hour-10" className = "flex items-center gap-3 w-full row time-div">
+                <div id = "id-hour-10" className = "flex items-start gap-3 w-full row time-div">
                     <p className = "w-20 text-xs whitespace-nowrap text-right shrink-0">10:00 AM</p>
                     <button type="button" className ="flex-1  h-10 bg-netural-secondary-medium border rounded-2xl border-green-theme hover:bg-success-strong focus:ring-4 focus:ring-green-theme shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none"></button>
                 </div>
 
-                <div id = "id-hour-11" className = "flex items-center gap-3 row time-div">
+                <div id = "id-hour-11" className = "flex items-start gap-3 row time-div">
                     <p className = "w-20 text-right shrink-0 text-xs  whitespace-nowrap">11:00 AM</p>
                     <button type="button" className ="w-full h-10 bg-netural-secondary-medium border rounded-2xl border-green-theme hover:bg-success-strong focus:ring-4 focus:ring-green-theme shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none"></button>
                 </div>
 
-                <div id = "id-hour-12" className = "flex items-center gap-3 row time-div">
+                <div id = "id-hour-12" className = "flex items-start gap-3 row time-div">
                     <p className = "w-20 text-right shrink-0 text-xs  whitespace-nowrap">12:00 PM</p>
                     <button type="button" className ="w-full h-10 bg-netural-secondary-medium border rounded-2xl border-green-theme hover:bg-success-strong focus:ring-4 focus:ring-green-theme shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none"></button>
                 </div>
 
-                <div id = "id-hour-13" className = "flex items-center gap-3 row time-div">
+                <div id = "id-hour-13" className = "flex items-start gap-3 row time-div">
                     <p className = "w-20 text-right shrink-0 text-xs  whitespace-nowrap">1:00 PM</p>
                     <button type="button" className ="w-full h-10 bg-netural-secondary-medium border rounded-2xl border-green-theme hover:bg-success-strong focus:ring-4 focus:ring-green-theme shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none"></button>
                 </div>
 
-                <div id = "id-hour-14" className = "flex items-center gap-3 row time-div">
+                <div id = "id-hour-14" className = "flex items-start gap-3 row time-div">
                     <p className = "w-20 text-right shrink-0 text-xs  whitespace-nowrap">2:00 PM</p>
                     <button type="button" className ="w-full h-10 bg-netural-secondary-medium border rounded-2xl border-green-theme hover:bg-success-strong focus:ring-4 focus:ring-green-theme shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none"></button>
                 </div>
 
-                <div id = "id-hour-15" className = "flex items-center gap-3 row time-div">
+                <div id = "id-hour-15" className = "flex items-start gap-3 row time-div">
                     <p className = "w-20 text-right shrink-0 text-xs  whitespace-nowrap">3:00 PM</p>
                     <button type="button" className ="w-full h-10 bg-netural-secondary-medium border rounded-2xl border-green-theme hover:bg-success-strong focus:ring-4 focus:ring-green-theme shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none"></button>
                 </div>
 
-                <div id = "id-hour-16" className = "flex items-center gap-3 row time-div">
+                <div id = "id-hour-16" className = "flex items-start gap-3 row time-div">
                     <p className = "w-20 text-right shrink-0 text-xs  whitespace-nowrap">4:00 PM</p>
                     <button type="button" className ="w-full h-10 bg-netural-secondary-medium border rounded-2xl border-green-theme hover:bg-success-strong focus:ring-4 focus:ring-green-theme shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none"></button>
                 </div>
 
-                <div id = "id-hour-17" className = "flex items-center gap-3 row time-div">
+                <div id = "id-hour-17" className = "flex items-start gap-3 row time-div">
                     <p className = "w-20 text-right shrink-0 text-xs  whitespace-nowrap">5:00 PM</p>
                     <button type="button" className ="w-full h-10 bg-netural-secondary-medium border rounded-2xl border-green-theme hover:bg-success-strong focus:ring-4 focus:ring-green-theme shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none"></button>
                 </div>
 
-                <div id = "id-hour-18" className = "flex items-center gap-3 row time-div">
+                <div id = "id-hour-18" className = "flex items-start gap-3 row time-div">
                     <p className = "w-20 text-right shrink-0 text-xs  whitespace-nowrap">6:00 PM</p>
                     <button type="button" className ="w-full h-10 bg-netural-secondary-medium border rounded-2xl border-green-theme hover:bg-success-strong focus:ring-4 focus:ring-green-theme shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none"></button>
                 </div>
 
-                <div id = "id-hour-19" className = "flex items-center gap-3 row time-div">
+                <div id = "id-hour-19" className = "flex items-start gap-3 row time-div">
                     <p className = "w-20 text-right shrink-0 text-xs  whitespace-nowrap">7:00 PM</p>
                     <button type="button" className ="w-full h-10 bg-netural-secondary-medium border rounded-2xl border-green-theme hover:bg-success-strong focus:ring-4 focus:ring-green-theme shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none"></button>
                 </div>
 
-                <div id = "id-hour-20" className = "flex items-center gap-3 row time-div">
+                <div id = "id-hour-20" className = "flex items-start gap-3 row time-div">
                     <p className = "w-20 text-right shrink-0 text-xs  whitespace-nowrap">8:00 PM</p>
                     <button type="button" className ="w-full h-10 bg-netural-secondary-medium border rounded-2xl border-green-theme hover:bg-success-strong focus:ring-4 focus:ring-green-theme shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none"></button>
                 </div>
 
-                <div id = "id-hour-21" className = "flex items-center gap-3 row time-div">
+                <div id = "id-hour-21" className = "flex items-start gap-3 row time-div">
                     <p className = "w-20 text-right shrink-0 text-xs  whitespace-nowrap">9:00 PM</p>
                     <button type="button" className ="w-full h-10 bg-netural-secondary-medium border rounded-2xl border-green-theme hover:bg-success-strong focus:ring-4 focus:ring-green-theme shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none"></button>
                 </div>
 
-                <div id = "id-hour-22" className = "flex items-center gap-3 row time-div">
+                <div id = "id-hour-22" className = "flex items-start gap-3 row time-div">
                     <p className = "w-20 text-right shrink-0 text-xs  whitespace-nowrap">10:00 PM</p>
                     <button type="button" className ="w-full h-10 flex grow-3 bg-netural-secondary-medium border rounded-2xl border-green-theme hover:bg-success-strong focus:ring-4 focus:ring-green-theme shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none"></button>
                 </div>
 
-                <div id = "id-hour-23" className = "flex items-center gap-3 row time-div">
+                <div id = "id-hour-23" className = "flex items-start gap-3 row time-div">
                     <p className = "w-20 text-right shrink-0 text-xs  whitespace-nowrap">11:00 PM</p>
                     <button type="button" className ="w-full h-10 bg-netural-secondary-medium border rounded-2xl border-green-theme hover:bg-success-strong focus:ring-4 focus:ring-green-theme shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none"></button>
                 </div>
 
-                <div id = "id-hour-24" className = "flex items-center gap-3 row time-div">
+                <div id = "id-hour-24" className = "flex items-start gap-3 row time-div">
                     <p className = "w-20 text-right shrink-0 text-xs  whitespace-nowrap">12:00 AM</p>
                     <button type="button" className ="w-full h-10 bg-netural-secondary-medium border rounded-2xl border-green-theme hover:bg-success-strong focus:ring-4 focus:ring-green-theme shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none"></button>
                 </div>
 
-                <div id = "id-hour-01" className = "flex items-center gap-3 row time-div">
+                <div id = "id-hour-01" className = "flex items-start gap-3 row time-div">
                     <p className = "w-20 text-right shrink-0 text-xs  whitespace-nowrap">1:00 AM</p>
                     <button type="button" className ="w-full h-10 bg-netural-secondary-medium border rounded-2xl border-green-theme hover:bg-success-strong focus:ring-4 focus:ring-green-theme shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none"></button>
                 </div>
