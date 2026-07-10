@@ -4,27 +4,105 @@ import 'react-calendar/dist/Calendar.css';
 import AxiosInstance from "./Axios";
 import {useState, useEffect} from "react";
 
-export function pickSchedule() {
-
-
-
-
-
-
-}
 
 export function BookingPage() {
 
 
-    const [date, setDate] = useState([])
+    interface Booking {
+    id: number;
+    patron_id: number;
+    time_start: string;
+    time_end: string;
+    }
 
-    console.log(date)
+    //const [date, setDate] = useState([])
+    const [bookings, setBookings] = useState<Booking[]>([]);
+    const [selectedDate, setSelectedDate] = useState("");
+
 
      const GetData = () => {
-        AxiosInstance.get('date/').then((res) => { setDate(res.data) })
+        AxiosInstance.get('date/').then((res) => { setBookings(res.data); console.log(res.data); }).catch((err) => console.error(err));
      }
 
      useEffect(() => {GetData()}, [])
+
+    // Fetch schedules from Django API
+    // useEffect(() => {
+    //     fetch("http://localhost:8000/date/?format=api")
+    //         .then((res) => res.json())
+    //         .then((data) => {
+    //             setBookings(data);
+    //             console.log("Fetched bookings:", data);
+    //         })
+    // }, []);
+
+    // Fixed time slots
+    const timeSlots = [
+        "05:00",
+        "06:00",
+        "07:00",
+        "08:00",
+        "09:00",
+        "10:00",
+        "11:00",
+        "12:00",
+        "13:00", //1
+        "14:00", //2
+        "15:00", //3
+        "16:00", //4
+        "17:00", //5
+        "18:00", //6
+        "19:00", //7
+        "20:00", //8
+        "21:00", //9
+        "22:00", //10
+        "23:00", //11
+        "24:00", //12
+        "01:00",
+    ];
+    
+
+    // Filter bookings based on selected date. this returned the selected date e.g 2026-7-10
+    const filteredBookings = bookings.filter(
+        (booking) => booking.time_start.split("T")[0] === selectedDate
+    );
+
+    // Check if slot is booked 
+    //slot in the parameter pertains to the time slots
+    // return slots that are booked
+    const isBooked = (slot: string) => {
+        return filteredBookings.some((booking) => {
+            const start = booking.time_start.slice(11, 16);
+            const end = booking.time_end.slice(11, 16);
+
+            return slot >= start && slot <= end;
+        });
+    };
+
+    const [time, setTime] = useState("");
+
+    // Format for display (24h -> 12h)
+    const formatTime = (slot: string) => {
+        const [hour, minute] = slot.split(":");
+        let h = parseInt(hour);
+        const suffix = h >= 12 ? "PM" : "AM";
+
+        if (h === 0) h = 12;
+        if (h > 12) h -= 12;
+
+        return(`${h}:${minute} ${suffix}`);
+
+        
+
+    };
+
+
+    // Calendar date select handler
+    const handleDateSelect = (date: Date) => {
+        setSelectedDate(date.toISOString().split("T")[0]);
+    };
+     
+
 
 
     return(
@@ -37,120 +115,34 @@ export function BookingPage() {
             {/* main content wrapper */}
             <div className = "flex flex-col-reverse md:flex-row items-start justify-center gap-10 w-full max-w-6xl"> 
 
-            {/* calendar and schedule picker */}
-            <div className="w-full md:w-1/2 relative justify-items-center">
-            <Calendar  />
-
-            <div className = "h-80 overflow-y-auto no-scrollbar mt-10 mb-10 justify-center w-1/2 md:w-1/2 p-2">
-
-                <div id = "id-hour-05" className = "flex items-start gap-3 w-full row time-div">
-                    <p className = "w-20 text-right shrink-0 text-xs whitespace-nowrap">5:00 AM</p>
-                    <button type="button" className ="flex-1 h-10 bg-netural-secondary-medium border rounded-2xl border-green-theme hover:bg-success-strong focus:ring-4 focus:ring-green-theme shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none"></button>
-                </div>
-
-                <div id = "id-hour-06" className = "flex items-start gap-3 w-full row time-div">
-                    <p className = "w-20 text-right shrink-0 text-xs whitespace-nowrap">6:00 AM</p>
-                    <button type="button" className ="flex-1 h-10 bg-netural-secondary-medium border rounded-2xl border-green-theme hover:bg-success-strong focus:ring-4 focus:ring-green-theme shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none"></button>
-                </div>
-
-                <div id = "id-hour-07" className = "flex items-start gap-3 w-full row time-div">
-                    <p className = "w-20 text-right shrink-0 text-xs whitespace-nowrap">7:00 AM</p>
-                    <button type="button" className ="flex-1 h-10 bg-netural-secondary-medium border rounded-2xl border-green-theme hover:bg-success-strong focus:ring-4 focus:ring-green-theme shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none"></button>
-                </div>
-
-                <div id = "id-hour-08" className = "flex items-start gap-3 w-full row time-div">
-                    <p className = "w-20 text-right shrink-0 text-xs whitespace-nowrap">8:00 AM</p>
-                    <button type="button" className ="flex-1 h-10 bg-netural-secondary-medium border rounded-2xl border-green-theme hover:bg-success-strong focus:ring-4 focus:ring-green-theme shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none"></button>
-                </div>
-
-                <div id = "id-hour-09" className = "flex items-start gap-3 w-full row time-div">
-                    <p className = "w-20 text-right shrink-0 text-xs  whitespace-nowrap">9:00 AM</p>
-                    <button type="button" className ="flex-1 h-10 bg-netural-secondary-medium border rounded-2xl border-green-theme hover:bg-success-strong focus:ring-4 focus:ring-green-theme shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none"></button>
-                </div>
-
-                <div id = "id-hour-10" className = "flex items-start gap-3 w-full row time-div">
-                    <p className = "w-20 text-xs whitespace-nowrap text-right shrink-0">10:00 AM</p>
-                    <button type="button" className ="flex-1  h-10 bg-netural-secondary-medium border rounded-2xl border-green-theme hover:bg-success-strong focus:ring-4 focus:ring-green-theme shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none"></button>
-                </div>
-
-                <div id = "id-hour-11" className = "flex items-start gap-3 row time-div">
-                    <p className = "w-20 text-right shrink-0 text-xs  whitespace-nowrap">11:00 AM</p>
-                    <button type="button" className ="w-full h-10 bg-netural-secondary-medium border rounded-2xl border-green-theme hover:bg-success-strong focus:ring-4 focus:ring-green-theme shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none"></button>
-                </div>
-
-                <div id = "id-hour-12" className = "flex items-start gap-3 row time-div">
-                    <p className = "w-20 text-right shrink-0 text-xs  whitespace-nowrap">12:00 PM</p>
-                    <button type="button" className ="w-full h-10 bg-netural-secondary-medium border rounded-2xl border-green-theme hover:bg-success-strong focus:ring-4 focus:ring-green-theme shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none"></button>
-                </div>
-
-                <div id = "id-hour-13" className = "flex items-start gap-3 row time-div">
-                    <p className = "w-20 text-right shrink-0 text-xs  whitespace-nowrap">1:00 PM</p>
-                    <button type="button" className ="w-full h-10 bg-netural-secondary-medium border rounded-2xl border-green-theme hover:bg-success-strong focus:ring-4 focus:ring-green-theme shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none"></button>
-                </div>
-
-                <div id = "id-hour-14" className = "flex items-start gap-3 row time-div">
-                    <p className = "w-20 text-right shrink-0 text-xs  whitespace-nowrap">2:00 PM</p>
-                    <button type="button" className ="w-full h-10 bg-netural-secondary-medium border rounded-2xl border-green-theme hover:bg-success-strong focus:ring-4 focus:ring-green-theme shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none"></button>
-                </div>
-
-                <div id = "id-hour-15" className = "flex items-start gap-3 row time-div">
-                    <p className = "w-20 text-right shrink-0 text-xs  whitespace-nowrap">3:00 PM</p>
-                    <button type="button" className ="w-full h-10 bg-netural-secondary-medium border rounded-2xl border-green-theme hover:bg-success-strong focus:ring-4 focus:ring-green-theme shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none"></button>
-                </div>
-
-                <div id = "id-hour-16" className = "flex items-start gap-3 row time-div">
-                    <p className = "w-20 text-right shrink-0 text-xs  whitespace-nowrap">4:00 PM</p>
-                    <button type="button" className ="w-full h-10 bg-netural-secondary-medium border rounded-2xl border-green-theme hover:bg-success-strong focus:ring-4 focus:ring-green-theme shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none"></button>
-                </div>
-
-                <div id = "id-hour-17" className = "flex items-start gap-3 row time-div">
-                    <p className = "w-20 text-right shrink-0 text-xs  whitespace-nowrap">5:00 PM</p>
-                    <button type="button" className ="w-full h-10 bg-netural-secondary-medium border rounded-2xl border-green-theme hover:bg-success-strong focus:ring-4 focus:ring-green-theme shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none"></button>
-                </div>
-
-                <div id = "id-hour-18" className = "flex items-start gap-3 row time-div">
-                    <p className = "w-20 text-right shrink-0 text-xs  whitespace-nowrap">6:00 PM</p>
-                    <button type="button" className ="w-full h-10 bg-netural-secondary-medium border rounded-2xl border-green-theme hover:bg-success-strong focus:ring-4 focus:ring-green-theme shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none"></button>
-                </div>
-
-                <div id = "id-hour-19" className = "flex items-start gap-3 row time-div">
-                    <p className = "w-20 text-right shrink-0 text-xs  whitespace-nowrap">7:00 PM</p>
-                    <button type="button" className ="w-full h-10 bg-netural-secondary-medium border rounded-2xl border-green-theme hover:bg-success-strong focus:ring-4 focus:ring-green-theme shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none"></button>
-                </div>
-
-                <div id = "id-hour-20" className = "flex items-start gap-3 row time-div">
-                    <p className = "w-20 text-right shrink-0 text-xs  whitespace-nowrap">8:00 PM</p>
-                    <button type="button" className ="w-full h-10 bg-netural-secondary-medium border rounded-2xl border-green-theme hover:bg-success-strong focus:ring-4 focus:ring-green-theme shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none"></button>
-                </div>
-
-                <div id = "id-hour-21" className = "flex items-start gap-3 row time-div">
-                    <p className = "w-20 text-right shrink-0 text-xs  whitespace-nowrap">9:00 PM</p>
-                    <button type="button" className ="w-full h-10 bg-netural-secondary-medium border rounded-2xl border-green-theme hover:bg-success-strong focus:ring-4 focus:ring-green-theme shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none"></button>
-                </div>
-
-                <div id = "id-hour-22" className = "flex items-start gap-3 row time-div">
-                    <p className = "w-20 text-right shrink-0 text-xs  whitespace-nowrap">10:00 PM</p>
-                    <button type="button" className ="w-full h-10 flex grow-3 bg-netural-secondary-medium border rounded-2xl border-green-theme hover:bg-success-strong focus:ring-4 focus:ring-green-theme shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none"></button>
-                </div>
-
-                <div id = "id-hour-23" className = "flex items-start gap-3 row time-div">
-                    <p className = "w-20 text-right shrink-0 text-xs  whitespace-nowrap">11:00 PM</p>
-                    <button type="button" className ="w-full h-10 bg-netural-secondary-medium border rounded-2xl border-green-theme hover:bg-success-strong focus:ring-4 focus:ring-green-theme shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none"></button>
-                </div>
-
-                <div id = "id-hour-24" className = "flex items-start gap-3 row time-div">
-                    <p className = "w-20 text-right shrink-0 text-xs  whitespace-nowrap">12:00 AM</p>
-                    <button type="button" className ="w-full h-10 bg-netural-secondary-medium border rounded-2xl border-green-theme hover:bg-success-strong focus:ring-4 focus:ring-green-theme shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none"></button>
-                </div>
-
-                <div id = "id-hour-01" className = "flex items-start gap-3 row time-div">
-                    <p className = "w-20 text-right shrink-0 text-xs  whitespace-nowrap">1:00 AM</p>
-                    <button type="button" className ="w-full h-10 bg-netural-secondary-medium border rounded-2xl border-green-theme hover:bg-success-strong focus:ring-4 focus:ring-green-theme shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none"></button>
-                </div>
-
             
 
-            </div>
+            {/* calendar and schedule picker */}
+            <div className="w-full md:w-1/2 relative justify-items-center">
+
+
+            {/* setSelectedDate(date.toISOString().split("T")[0]); console.log(date.toISOString()); */}
+            <Calendar  onChange= {(value) => {const date = value as Date; setSelectedDate(date.toLocaleDateString("sv")); } } className = "border-hidden! shadow-xl! rounded-2xl! font-sans!"/>
+                    <div className="h-80 overflow-y-auto no-scrollbar mt-10 mb-10 w-full max-w-xs p-2">
+            {timeSlots.map((slot) => (
+                <div key={slot} className="flex items-start gap-3 ">
+                    <p className="w-20 text-xs font-bold text-right shrink-0">
+                        { formatTime(slot) }
+                    </p>
+
+                    <button
+                        type="button"
+                        disabled={isBooked(slot)}
+                        className={`flex-1 h-11 border rounded-2xl ${
+                            isBooked(slot)
+                                ? "bg-green-gray cursor-not-allowed"
+                                : "bg-neutral-secondary-medium hover:bg-success-strong focus:ring-4 focus:ring-green-theme shadow-xs"
+                        }`}
+                    >
+                    </button>
+                </div>
+            ))}
+        </div>
 
             </div>
 

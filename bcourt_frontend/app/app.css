@@ -6,7 +6,9 @@
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --color-green-theme: #25493f;
   --color-blue-theme: #142d4b;
+  --color-green-gray: #395d52;
   --color-yellow-theme: #e7d706;
+  --font-display : "Montserrat";
 }
 
 html,
@@ -27,4 +29,8 @@ header {
 
 @utility no-scrollbar {
   @apply [scrollbar-:none] [&::-webkit-scrollbar]:hidden;
+}
+
+react-calendar {
+
 }
